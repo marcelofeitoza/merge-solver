@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - OPENAI_SECRET_KEY=${OPENAI_SECRET_KEY}
+    env_file:
+      - ./api/.env
+
+  cli:
+    build:
+      context: ./cli
+      dockerfile: Dockerfile
+    volumes:
+      - ./cli:/data  # Vincula o diretório local ao contêiner
+    depends_on:
+      - api
