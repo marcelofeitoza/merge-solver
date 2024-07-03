@@ -1,64 +1,63 @@
 # Merge-Solver
 
-O Merge-Solver é um conjunto de ferramentas que inclui uma API em Go e uma CLI em Rust que facilitam o merge automática de arquivos de código sem precisar alterar manualmente. 
-Prioriza as alterações dos arquivos mais novos, enquanto integra perfeitamente o conteúdo das versões mais antigas, garantindo que as atualizações sejam incorporadas e a compatibilidade seja mantida.
+Merge-Solver is a toolkit that includes a Go API and a Rust CLI to facilitate automatic merging of code files without manual changes. It prioritizes changes from the newer files while seamlessly integrating content from older versions, ensuring updates are incorporated and compatibility is maintained.
 
-## Funcionalidades
+## Features
 
-- **API (Go):** Serviço para realizar o merge dos arquivos de código.
-- **CLI (Rust):** Interage com a API para enviar arquivos de código e receber o resultado com merge feito.
+- **API (Go):** Service to perform code file merging.
+- **CLI (Rust):** Interacts with the API to send code files and receive the merged result.
 
-## Primeiros Passos
+## Getting Started
 
-Estas instruções permitirão que você tenha uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-### Pré-requisitos
+### Prerequisites
 
-Antes de começar, certifique-se de que você possui o seguinte instalado:
-- [Go](https://golang.org/doc/install) (versão 1.22 ou superior)
+Before you begin, make sure you have the following installed:
+- [Go](https://golang.org/doc/install) (version 1.22 or higher)
 - [Rust](https://www.rust-lang.org/tools/install)
-- [Git](https://git-scm.com/book/pt-br/v2/Começando-Instalando-o-Git)
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-### Configuração
+### Setup
 
-Crie um arquivo `.env` no diretório `api` com o seguinte conteúdo:
+Create a `.env` file in the `api` directory with the following content:
 
 ```py
 OPENAI_SECRET_KEY="secret_key"
 ```
 
-Substitua pela sua chave de API OpenAI real.
+Replace with your actual OpenAI API key.
 
-### Rodando Localmente
+### Running Locally
 
-1. **Configurando a API em Go**
+1. **Setting up the Go API**
 
-   Navegue até o diretório da API e construa o serviço:
+   Navigate to the API directory and build the service:
 
    ```bash
    cd api/
-   go run cmd/app/main.go # ou apenas `air` para rodar com hot reload
+   go run cmd/app/main.go # or just `air` to run with hot reload
    ```
 
-2. **Configurando a CLI em Rust**
+2. **Setting up the Rust CLI**
 
-   Navegue até o diretório da CLI e construa o executável:
+   Navigate to the CLI directory and build the executable:
 
    ```bash
    cd cli/
    cargo build --release
-   ./target/release/cli --old caminho/para/arquivo_antigo.rs --new caminho/para/arquivo_novo.rs
+   ./target/release/cli --old path/to/old_file.rs --new path/to/new_file.rs
    ```
 
-### Usando a CLI
+### Using the CLI
 
-Com a API em execução, você pode usar a CLI para mesclar dois arquivos:
+With the API running, you can use the CLI to merge two files:
 
 ```bash
-./target/release/file_diff --old caminho/para/arquivo_antigo.rs --new caminho/para/arquivo_novo.rs
+./target/release/file_diff --old path/to/old_file.rs --new path/to/new_file.rs
 ```
 
-## Como Funciona
+## How It Works
 
-- A **API** possui um endpoint POST `/merge` que aceita um JSON com dois campos: `old` e `new`, representando o código antigo e o novo.
-- A **CLI** lê o conteúdo dos arquivos fornecidos, envia-os para a API e exibe o resultado com o merge realizado.
+- The **API** has a POST `/merge` endpoint that accepts a JSON object with two fields: `old` and `new`, representing the old and new code.
+- The **CLI** reads the content of the provided files, sends them to the API, and displays the merged result.
